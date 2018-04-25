@@ -104,6 +104,35 @@
         }
       }
     },
+    "/system/merchants/v1/{merchantCode}/targetMarketplaces": {
+      "post": {
+        "tags": [
+          "System - Merchants - Merchants"
+        ],
+        "summary": "Get the list of marketplace for a merchant",
+        "operationId": "GetMerchantTargetMarketplaceList",
+        "parameters": [
+          {
+            "$ref": "#/parameters/merchantCodeParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "description": "The key is the marketplace code",
+              "additionalProperties": {
+                "$ref": "#/definitions/merchantTargetMarketplaceInfo"
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/GeneralError"
+          }
+        }
+      }
+    },
     "/system/marketplaces/v1/": {
       "get": {
         "tags": [
@@ -183,13 +212,17 @@
           "description": "filter merchants by to ending creation date"
         },
         "filterCountry": {
-          "type": "string",
-          "description": "filter merchants by country code",
-          "example": "FRA"
+          "$ref": "#/definitions/countryIsoCodeAlpha3"
         },
         "filterSalesforceStatus": {
           "type": "boolean",
           "description": "filter merchants by SalesforceStatus"
+        },
+        "filterSourceMarketplaceCode": {
+          "$ref": "#/definitions/marketplaceCode"
+        },
+        "filterSourceMarketplaceCredentialStatus": {
+          "$ref": "#/definitions/marketplaceCredentialStatus"
         }
       }
     },
@@ -308,15 +341,13 @@
           "type": "boolean",
           "description": "Sales Force status id"
         },
-        "credentialStatusId": {
+        "credentialStatus": {
           "$ref": "#/definitions/marketplaceCredentialStatus"
         },
-        "targetMarketplaces": {
-          "type": "object",
-          "description": "The key is the marketplace code",
-          "additionalProperties": {
-            "$ref": "#/definitions/merchantTargetMarketplaceInfo"
-          }
+        "targetMarketplaceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The target marketplace count of this merchant"
         }
       }
     },
@@ -370,10 +401,42 @@
           "type": "string",
           "description": "the tarket marketplace merchant code ??"
         },
-        "turnOvers": {
+        "turnOver": {
           "type": "number",
           "format": "decimal",
           "example": 10602.23
+        },
+        "currencyCode": {
+          "$ref": "#/definitions/currencyCode"
+        },
+        "subscriptionHistory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/marketplaceSubcriptionReporting"
+          }
+        }
+      }
+    },
+    "marketplaceSubcriptionReporting": {
+      "type": "object",
+      "required": [
+        "senderEmail",
+        "utcDate",
+        "status"
+      ],
+      "properties": {
+        "senderEmail": {
+          "$ref": "#/definitions/email"
+        },
+        "utcDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "$ref": "#/definitions/marketplaceSubscriptionStatus"
+        },
+        "message": {
+          "type": "string"
         }
       }
     },
@@ -464,6 +527,7 @@
       "required": [
         "code",
         "name",
+        "imageUrl",
         "status"
       ],
       "properties": {
@@ -473,6 +537,9 @@
         "name": {
           "type": "string",
           "example": "Cdiscount"
+        },
+        "imageUrl": {
+          "$ref": "#/definitions/httpUrl"
         },
         "status": {
           "$ref": "#/definitions/marketplaceStatus"
@@ -513,21 +580,24 @@
           "format": "int32",
           "description": "Imported order count from the marketplace"
         },
-        "sourceMerchantOrderCount": {
+        "sourceOrderCount": {
           "type": "integer",
           "format": "int32"
         },
-        "targetMerchantOrderCount": {
+        "targetOrderCount": {
           "type": "integer",
           "format": "int32"
         },
-        "targetMerchantTurnOver": {
+        "targetTurnOver": {
           "type": "number",
           "format": "decimal"
         },
-        "sourceMerchantTurnOver": {
+        "sourceTurnOver": {
           "type": "number",
           "format": "decimal"
+        },
+        "currencyCode": {
+          "$ref": "#/definitions/currencyCode"
         },
         "targetMerchantCredentialCounter": {
           "type": "object",
