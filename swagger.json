@@ -1,36 +1,22 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0",
     "title": "IMN system API- DEV",
     "description": "# The REST API of IMN system\n## Overview\nThe REST APIs provide programmatic access to read and write IMN data. \nBasically, with this API you will be able to do everything like you were with your browser on https://go.imn.io !\n\nThe main features are:\n- Register and manage your account\n- Create and manage and share your stores with your friends/co-workers.\n- Import your product catalog and schedule the auto importation\n- Search the channels your want to use\n- Configure your channels for your catalogs to export your product information:\n    - cost and general settings\n    - category and columns mappings\n    - your will be able to create and manage your custom column\n    - put in place exlusion filters based on simple conditions on your product data\n    - override product values\n    - get product vision for a channel catalog scope\n- Analyze and optimize your performance of your catalogs on all yours channels with different type of reportings by day, channel, category and by product.\n- Automatize your optimisation by using rules!\n- And of course... Manage your orders harvested from all your marketplaces:\n    - Synchronize your orders in an uniformized way\n    - Get the available actions and update the order status\n- ...and more!\n\n## Authentication credentials\nTBD\n\n## Things to keep in mind\n### API Rate Limits\n- The IMN REST API is limited to 100 calls/minute.\n\n### Media type\nThe default media type for requests and responses is application/json. Where noted, some operations support other content types. If no additional content type is mentioned for a specific operation, then the media type is application/json.\n\n### Required content type\nThe required and default encoding for the request and responses is UTF8.\n\n### Required date time format\nAll our date time are formatted in ISO 8601 format: 2014-06-24T16:25:00Z.\n\n### Base URL\nThe Base URL of the IMN API Order Management REST API conforms to the following template.\n\nhttps://api.imn.io\n\nAll URLs returned by the IMN API are relative to this base URL, and all requests to the REST API must use this base URL template.\n\nYou can test our API on https://api-docs.imn.io/swagger-ui\\\nYou can contact us on [gitter, #IMN/API](https://gitter.im/IMN/API)\n",
-    "x-logo": {
-      "url": "https://imngo.blob.core.windows.net/imngo/images/imn-logo.png",
-      "backgroundfColor": "#FFFFFF"
-    },
+    "version": "1.0",
     "contact": {
-      "email": "support@imn.io"
+      "email": "support@beezup.com"
+    },
+    "license": {
+      "name": "IMN",
+      "url": "https://go.imn.io"
     }
   },
   "host": "api.imn.io",
-  "x-IMN-api-ops": {
-    "codeGenType": "webapi",
-    "repo": "IMN",
-    "appRoot": "IMN.SYS.MER.WebService",
-    "apiName": "SystemMerchantsV1",
-    "namespace": "IMN.SYS.MER.WebService",
-    "useBeezUPFrameworkVersion2": true,
-    "comment": "No change. Just server side generation.\n",
-    "using": [
-      "IMN.Schemas",
-      "IMN.MER.Schemas",
-      "IMN.MER.Exceptions"
-    ]
-  },
-  "x-basePath": "/system/merchants/v1",
   "schemes": [
     "https"
   ],
+  "x-basePath": "/system/lov/v1",
   "consumes": [
     "application/json"
   ],
@@ -38,6 +24,11 @@
     "application/json"
   ],
   "tags": [
+    {
+      "name": "System API - List of Values - LOV",
+      "description": "All LOV operations",
+      "x-displayName": "LOV"
+    },
     {
       "name": "System - Merchants - Global",
       "x-displayName": "Global"
@@ -68,6 +59,137 @@
     }
   ],
   "paths": {
+    "/system/lov/v1/": {
+      "get": {
+        "summary": "Get all list names",
+        "operationId": "GetUserLovIndex",
+        "tags": [
+          "System API - List of Values - LOV"
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the list names",
+            "headers": {
+              "ETag": {
+                "description": "The ETag corresponding to the LOV Index",
+                "type": "string"
+              },
+              "Cache-Control": {
+                "description": "Indicates the directive around the caching mechanisms.\\\nFor more information, please go to this link: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9\n",
+                "type": "array",
+                "collectionFormat": "csv",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/userLovIndex"
+            }
+          },
+          "304": {
+            "description": "The ETag sent in the http header If-None-Match did not change. So you can keep your version.",
+            "headers": {
+              "ETag": {
+                "description": "The ETag corresponding to the LOV Index",
+                "type": "string"
+              },
+              "Cache-Control": {
+                "description": "Indicates the directive around the caching mechanisms.\\\nFor more information, please go to this link: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9\n",
+                "type": "array",
+                "collectionFormat": "csv",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/responses/GeneralError"
+          }
+        }
+      }
+    },
+    "/system/lov/v1/{listName}": {
+      "get": {
+        "tags": [
+          "System API - List of Values - LOV"
+        ],
+        "summary": "Get the list of values related to this list name",
+        "operationId": "GetUserListOfValues",
+        "parameters": [
+          {
+            "name": "listName",
+            "in": "path",
+            "required": true,
+            "description": "The list of value name your want to get",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguageParameter"
+          },
+          {
+            "$ref": "#/parameters/ifNoneMatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of values",
+            "headers": {
+              "ETag": {
+                "description": "The ETag corresponding to the LOV Index",
+                "type": "string"
+              },
+              "Cache-Control": {
+                "description": "Indicates the directive around the caching mechanisms.\\\nFor more information, please go to this link: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9\n",
+                "type": "array",
+                "collectionFormat": "csv",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "Content-Language": {
+                "description": "Indicates the language use in the response",
+                "type": "array",
+                "collectionFormat": "csv",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/userListOfValuesResponse"
+            }
+          },
+          "304": {
+            "description": "The ETag sent in the http header If-None-Match did not change. So you can keep your version.",
+            "headers": {
+              "ETag": {
+                "description": "The ETag corresponding to the LOV Index",
+                "type": "string"
+              },
+              "Cache-Control": {
+                "description": "Indicates the directive around the caching mechanisms.\\\nFor more information, please go to this link: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9\n",
+                "type": "array",
+                "collectionFormat": "csv",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "List not found",
+            "schema": {
+              "$ref": "#/definitions/errorResponseMessage"
+            }
+          },
+          "default": {
+            "$ref": "#/responses/GeneralError"
+          }
+        }
+      }
+    },
     "/system/merchants/v1/": {
       "post": {
         "tags": [
@@ -155,6 +277,80 @@
     }
   },
   "definitions": {
+    "userLovIndex": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "$ref": "#/definitions/userLovIndexLinks"
+        }
+      }
+    },
+    "userLovIndexLinks": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "#/definitions/links.GetUserLovIndexLink"
+        },
+        "lists": {
+          "$ref": "#/definitions/userLovLinks"
+        }
+      }
+    },
+    "userLovLinks": {
+      "description": "List of lov link. The key is the list name.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/links.GetUserListOfValuesLink"
+      }
+    },
+    "links.GetUserListOfValuesLink": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/link3"
+        },
+        {
+          "example": {
+            "href": "/v1/user/lov/Go2CultureName",
+            "method": "GET"
+          }
+        }
+      ]
+    },
+    "links.GetUserLovIndexLink": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/link3"
+        },
+        {
+          "example": {
+            "href": "/v1/user/lov",
+            "method": "GET"
+          }
+        }
+      ]
+    },
+    "userListOfValuesResponse": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "$ref": "#/definitions/userListOfValuesResponseLinks"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/listOfValueItem"
+          }
+        }
+      }
+    },
+    "userListOfValuesResponseLinks": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "#/definitions/links.GetUserListOfValuesLink"
+        }
+      }
+    },
     "merchantListRequest": {
       "type": "object",
       "properties": {
@@ -4313,6 +4509,12 @@
     "url": "https://api-docs.imn.io/"
   },
   "x-tagGroups": [
+    {
+      "name": "System API - List of Values",
+      "tags": [
+        "System API - List of Values - LOV"
+      ]
+    },
     {
       "name": "System - Merchants",
       "tags": [
