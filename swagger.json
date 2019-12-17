@@ -34,28 +34,8 @@
       "x-displayName": "LOV"
     },
     {
-      "name": "System - Merchants - Global",
-      "x-displayName": "Global"
-    },
-    {
       "name": "System - Merchants - Merchants",
       "x-displayName": "Merchants"
-    },
-    {
-      "name": "System - Merchants - Api Credentials",
-      "x-displayName": "Api Credentials"
-    },
-    {
-      "name": "System - Merchants - Subscription",
-      "x-displayName": "Subscription"
-    },
-    {
-      "name": "System - Merchants - Marketplace Merchant Code",
-      "x-displayName": "Marketplace Merchant Code"
-    },
-    {
-      "name": "System - Marketplaces - Global",
-      "x-displayName": "Global"
     },
     {
       "name": "System - Marketplaces - Marketplaces",
@@ -1651,17 +1631,12 @@
     {
       "name": "System - Merchants",
       "tags": [
-        "System - Merchants - Global",
-        "System - Merchants - Merchants",
-        "System - Merchants - Api Credentials",
-        "System - Merchants - Subscription",
-        "System - Merchants - Marketplace Merchant Code"
+        "System - Merchants - Merchants"
       ]
     },
     {
       "name": "System - Marketplaces",
       "tags": [
-        "System - Marketplaces - Global",
         "System - Marketplaces - Marketplaces"
       ]
     }
