@@ -105,7 +105,7 @@
           {
             "name": "listName",
             "in": "path",
-            "required": true,
+            "required": "true",
             "description": "The list of value name your want to get",
             "type": "string"
           },
@@ -191,7 +191,7 @@
           {
             "name": "request",
             "in": "body",
-            "required": true,
+            "required": "true",
             "schema": {
               "$ref": "#/definitions/merchantListRequest"
             }
@@ -336,7 +336,7 @@
       }
     },
     "errorResponseMessage": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "type": "object",
       "required": [
         "errors"
@@ -380,7 +380,7 @@
       }
     },
     "userErrorMessage": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "type": "object",
       "required": [
         "code",
@@ -407,27 +407,27 @@
       }
     },
     "docUrl": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "type": "string",
       "format": "uri",
       "description": "The documentation related to this operation.",
       "example": "https://api-docs.imn.io/#operation/EnableChannelCatalog"
     },
     "errorCode": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "type": "string",
       "description": "the error code. The error code can be a pattern containing the argument's name",
       "example": "CatalogImportationAlreadyInProgress(ExecutionId currentCatalogImportationId)"
     },
     "cultureName": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "type": "string",
       "description": "If the error is translated, the culture name will be indicated",
       "example": "en",
       "x-lov": "Go2CultureName"
     },
     "userErrorMessageArguments": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "type": "object",
       "description": "a dictionary string/object",
       "additionalProperties": {
@@ -435,7 +435,7 @@
       }
     },
     "link3": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "type": "object",
       "required": [
         "href"
@@ -484,19 +484,19 @@
       }
     },
     "href": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "type": "string",
       "example": "/merchant/orders/v1/{marketplaceCode}/{IMNOrderId}",
       "description": "Indicate the relative uri for this link"
     },
     "operationId": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "type": "string",
       "description": "The operationId to call.",
       "example": "GetOrder"
     },
     "httpMethod": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "type": "string",
       "enum": [
         "GET",
@@ -511,7 +511,7 @@
       "description": "Indicate the http method to use on this link"
     },
     "linkParameter3Types": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/linkParameter3"
@@ -547,7 +547,7 @@
       }
     },
     "linkParameter3": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "type": "object",
       "required": [
         "in"
@@ -721,7 +721,7 @@
       }
     },
     "parameterIn": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "type": "string",
       "description": "* path: if the parameter must be pass in the path uri\n* header: if the parameter must be passed in http header\n* query: if the parameter must be passed in querystring\n* body: if the parameter must be passed in the body\n* file: if the parameter must be passed in a multipart/form-data (https://swagger.io/docs/specification/2-0/file-upload/)\n",
       "example": "path",
@@ -734,7 +734,7 @@
       ]
     },
     "LOVLink3": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "description": "Describe the way you have to follow to get access to the LOV",
       "type": "object",
       "required": [
@@ -758,7 +758,7 @@
       "example": "*.-api$"
     },
     "linkParameterProperty3": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "type": "object",
       "required": [
         "type"
@@ -822,7 +822,7 @@
       }
     },
     "parameterType": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "description": "The value type of the parameter",
       "type": "string",
       "enum": [
@@ -1152,7 +1152,7 @@
       "example": "configured"
     },
     "paginationResult": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "type": "object",
       "required": [
         "entryCount",
@@ -1165,19 +1165,19 @@
           "type": "integer",
           "description": "The entry count currently returned",
           "example": "25",
-          "minimum": 0
+          "minimum": "0"
         },
         "pageCount": {
           "type": "integer",
           "description": "The page count",
           "example": "38",
-          "minimum": 0
+          "minimum": "0"
         },
         "totalEntryCount": {
           "type": "integer",
           "description": "The total entry count",
           "example": "943",
-          "minimum": 0
+          "minimum": "0"
         },
         "links": {
           "$ref": "#/definitions/paginationResultLinks"
@@ -1275,7 +1275,7 @@
       "example": "enabled"
     },
     "currencyCode": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "description": "The currency code <a href=\"https://en.wikipedia.org/wiki/ISO_4217\">(ISO 4217)</a>\n",
       "type": "string",
       "pattern": "^[A-Z]{3}$",
@@ -1299,7 +1299,7 @@
       "example": "MLT01"
     },
     "email": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "description": "The email",
       "type": "string",
       "format": "email",
@@ -1321,7 +1321,7 @@
       "example": "005145"
     },
     "paginationResultLinks": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "description": "The navigation links 'first', 'last', 'next', 'previous'",
       "type": "object",
       "required": [
@@ -1533,7 +1533,7 @@
       }
     },
     "httpUrl": {
-      "x-exclude": true,
+      "x-exclude": "true",
       "description": "The URL <a href=\"https://en.wikipedia.org/wiki/URL\">https://en.wikipedia.org/wiki/URL</a>",
       "type": "string",
       "pattern": "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$",
@@ -1562,7 +1562,7 @@
       "name": "Accept-Language",
       "description": "Indicates that the client accepts the following languages.",
       "in": "header",
-      "required": false,
+      "required": "false",
       "type": "array",
       "collectionFormat": "csv",
       "items": {
@@ -1573,17 +1573,17 @@
       "name": "If-None-Match",
       "type": "string",
       "in": "header",
-      "required": false,
+      "required": "false",
       "description": "ETag value to identify the last known version of requested resource.\\\nTo avoid useless exchange, we recommend you to indicate the ETag you previously got from this operation.\\\nIf the ETag value does not match the response will be 200 to give you a new content, otherwise the response will be: 304 Not Modified, without any content.\\\nFor more details go to this link: http://tools.ietf.org/html/rfc7232#section-2.3\n"
     },
     "pageSizeQueryStringParameter": {
       "name": "pageSize",
       "description": "The entry count you want to get",
       "in": "query",
-      "required": true,
+      "required": "true",
       "type": "integer",
       "format": "PageSize",
-      "minimum": 25,
+      "minimum": "25",
       "x-minimum": "25",
       "maximum": "1000",
       "x-maximum": "1000",
@@ -1593,10 +1593,10 @@
       "name": "pageNumber",
       "description": "The page number you want to get",
       "in": "query",
-      "required": true,
+      "required": "true",
       "type": "integer",
       "format": "PageNumber",
-      "minimum": 1,
+      "minimum": "1",
       "x-minimum": "1",
       "x-example": "1"
     },
@@ -1604,7 +1604,7 @@
       "format": "MerchantCode",
       "name": "merchantCode",
       "in": "path",
-      "required": true,
+      "required": "true",
       "type": "string",
       "description": "The merchant code"
     }
